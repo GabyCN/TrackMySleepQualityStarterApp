@@ -114,7 +114,7 @@ class SleepTrackerViewModel(
     fun onClear() {
         uiScope.launch {
             clear()
-            tonight.value=null
+            tonight.value = null
         }
     }
 

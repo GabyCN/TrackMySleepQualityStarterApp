@@ -35,6 +35,16 @@ class SleepTrackerViewModel(
         val database: SleepDatabaseDao,
         application: Application) : AndroidViewModel(application) {
 
+    private var _showSnackbarEvent = MutableLiveData<Boolean>()
+    val showSnackbarEvent: LiveData<Boolean>
+    get()= _showSnackbarEvent
+
+    fun doneShowingSnackbar(){
+        _showSnackbarEvent.value=false
+    }
+
+
+
     private var viewModelJob = Job()
 
     override fun onCleared() {
@@ -125,6 +135,7 @@ class SleepTrackerViewModel(
         uiScope.launch {
             clear()
             tonight.value = null
+            _showSnackbarEvent.value=true
         }
     }
 
@@ -132,6 +143,18 @@ class SleepTrackerViewModel(
         withContext(Dispatchers.IO) {
             database.clear()
         }
+    }
+
+    val startButtonVisible = Transformations.map(tonight){
+        null==it
+    }
+
+    val stopButtonVisible = Transformations.map(tonight){
+        null != it
+    }
+
+    val clearButtonVisible = Transformations.map(nights){
+        it?.isNotEmpty()
     }
 
 

@@ -124,6 +124,9 @@ class SleepTrackerViewModel(
      * It will clear the navigation request, so if the user rotates their phone it won't navigate
      * twice.
      */
+
+
+
     fun doneNavigating() {
         _navigateToSleepQuality.value = null
     }
@@ -235,4 +238,16 @@ class SleepTrackerViewModel(
         super.onCleared()
         viewModelJob.cancel()
     }
+    private val _navigateToSleepDataQuality = MutableLiveData<Long>()
+    val nagivateToSleepDataQuality
+        get()=_navigateToSleepDataQuality
+
+    fun onSleepNightClicked(id:Long){
+        _navigateToSleepDataQuality.value= id
+    }
+
+    fun onSleepDataQualityNavigated(){
+        _navigateToSleepDataQuality.value=null
+    }
+
 }

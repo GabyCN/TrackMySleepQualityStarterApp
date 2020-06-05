@@ -21,6 +21,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 //import android.widget.ListAdapter
+//import android.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -38,7 +39,7 @@ private val ITEM_VIEW_TYPE_ITEM= 1
 
 
 class SleepNightAdapter (val clickListener: SleepNightListener):
-        ListAdapter<DataItem, RecyclerView.ViewHolder>(SleepNightDiffCallback())  {
+        androidx.recyclerview.widget.ListAdapter<DataItem, RecyclerView.ViewHolder>(SleepNightDiffCallback())  {
 
     private val adapterScope= CoroutineScope(Dispatchers.Default)
 
